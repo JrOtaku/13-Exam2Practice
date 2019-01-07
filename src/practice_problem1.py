@@ -6,8 +6,8 @@ This problem provides practice at:
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Emily Guajardo.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ###############################################################################
 # Students:
@@ -45,7 +45,7 @@ def main():
     # run_test_double()
     # run_test_shrink()
     # run_test_double_then_shrink()
-    # run_test_reset()
+    run_test_reset()
     # run_test_steal()
     # run_test_get_history()
     # run_test_combined_box()
@@ -94,8 +94,16 @@ class Box(object):
           :type contents: str
           :type volume: int
         """
+        self.volume = volume
+        if len(contents) > volume:
+            self.contents = ''
+        else:
+            self.contents = contents
+        self.v = volume
+        self.c = contents
+
         # ---------------------------------------------------------------------
-        # TODO: 2. Implement and test this function.
+        # Done: 2. Implement and test this function.
         #     See the testing code (below) for more examples.
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -135,8 +143,21 @@ class Box(object):
         Type hints:
           :type additional_contents: str
         """
+        string = self.contents + additional_contents
+        new_string = ''
+        returned_string = ''
+        if len(string) < self.volume:
+            self.contents = string
+            return ''
+        else:
+            for k in range(self.volume):
+                new_string += string[k]
+            for k in range(self.volume, len(string)):
+                returned_string += string[k]
+            self.contents = new_string
+        return returned_string
         # ---------------------------------------------------------------------
-        # TODO: 3. Implement and test this function.
+        # Done: 3. Implement and test this function.
         #     See the testing code (below) for more examples.
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -192,8 +213,9 @@ class Box(object):
           #   s is 'Robot Fun'   [this is the part of the doubled
           #                       contents that did NOT fit]
         """
+        return self.append_string(self.contents)
         # ---------------------------------------------------------------------
-        # TODO: 4. Implement and test this function.
+        # Done: 4. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -241,6 +263,9 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
+        self.volume = new_volume
+        return self.append_string('')
+
         # ---------------------------------------------------------------------
         # TODO: 5. Implement and test this function.
         #     The testing code is already written for you (above).
@@ -297,6 +322,9 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
+        thing1 = len(self.double())
+        thing2 = len(self.shrink(new_volume))
+        return thing1 + thing2
         # ---------------------------------------------------------------------
         # TODO: 6. Implement and test this function.
         #     The testing code is already written for you (above).
@@ -316,6 +344,9 @@ class Box(object):
           Changes this Box's contents and volume to whatever they were
           when this Box was constructed.
         """
+        self.volume = self.v
+        self.contents = self.c
+
         # ---------------------------------------------------------------------
         # TODO: 7. Implement and test this function.
         #     The testing code is already written for you (above).
